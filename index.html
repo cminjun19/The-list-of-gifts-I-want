@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>내가 원하는 선물 목록</title>
+<style>
+  @font-face {
+    font-family: 'Jalnan2';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2107@1.1/Jalnan2.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+</style>
+<style>
+  :root {
+    --bg: #fdfaf6;
+    --ink: #2b2521;
+    --accent: #4a6b5a;
+    --accent-light: #dce9e1;
+    --card: #ffffff;
+    --border: #e6ddd2;
+    --header-bg: #f3ede3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Malgun Gothic", sans-serif;
+  }
+
+  /* 헤더 */
+  header {
+    background: linear-gradient(to bottom, #b3b0ab, #d9d6d0);
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+  .logo {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+  }
+  header h1 {
+    margin: 0;
+    font-family: "Jalnan2", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: -0.5px;
+  }
+  .auth-links {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2b2521;
+    white-space: nowrap;
+  }
+  .auth-links span {
+    color: #4a4540;
+    margin: 0 6px;
+  }
+
+  /* 탭 (링크 없이 표시만) */
+  nav {
+    background: #dedbd5;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: center;
+    gap: 320px;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: "Jalnan2", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    cursor: default;
+  }
+
+  /* 콘텐츠 영역 */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+  /* 히어로 영역 */
+  .hero {
+    text-align: center;
+    padding: 56px 20px 48px;
+  }
+  .hero-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .hero h2 {
+    font-family: "Jalnan2", sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .hero p {
+    color: #8a8078;
+    font-size: 15px;
+    margin: 0 0 28px;
+    line-height: 1.6;
+  }
+  .hero-cta {
+    font-family: "Jalnan2", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(74, 107, 90, 0.25);
+  }
+  .hero-cta:hover {
+    opacity: 0.92;
+  }
+
+  /* 홈 2단 레이아웃 (좌: 선물 목록 요약 / 우: 공지사항 요약) */
+  .home-grid {
+    padding: 48px 32px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .panel-header h3 {
+    font-family: "Jalnan2", sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0;
+  }
+  .panel-more {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* 선물 목록 미니 항목 */
+  .mini-gift {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mini-gift:last-child { border-bottom: none; }
+  .mini-gift-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .mini-gift-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .mini-gift-title {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 3px;
+  }
+  .mini-gift-price {
+    font-size: 16px;
+    color: #a89e93;
+    margin: 0;
+  }
+  .mini-badge {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .mini-badge.checked {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  .mini-badge.unchecked {
+    background: #f3ede3;
+    color: #a89e93;
+  }
+
+  /* 공지사항 미니 항목 */
+  .mini-notice {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mini-notice:last-child { border-bottom: none; }
+  .mini-notice-title {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 5px;
+  }
+  .mini-notice-date {
+    font-size: 15px;
+    color: #a89e93;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <span class="logo">🎁</span>
+    <h1>내가 원하는 선물 목록</h1>
+    <div class="auth-links">로그인 <span>|</span> 회원가입</div>
+  </header>
+
+  <nav>
+    <span class="tab-btn">선물 목록 추가</span>
+    <span class="tab-btn">선물 목록</span>
+    <span class="tab-btn">공지사항</span>
+  </nav>
+
+  <main>
+    <div class="home-grid">
+      <section class="panel">
+        <div class="panel-header">
+          <h3>선물 목록</h3>
+          <span class="panel-more">더보기</span>
+        </div>
+
+        <div class="mini-gift">
+          <div class="mini-gift-thumb">🎧</div>
+          <div class="mini-gift-info">
+            <p class="mini-gift-title">무선 이어폰</p>
+            <p class="mini-gift-price">150,000원</p>
+          </div>
+          <span class="mini-badge checked">확인함</span>
+        </div>
+
+        <div class="mini-gift">
+          <div class="mini-gift-thumb">📚</div>
+          <div class="mini-gift-info">
+            <p class="mini-gift-title">책 - 코스모스</p>
+            <p class="mini-gift-price">18,000원</p>
+          </div>
+          <span class="mini-badge unchecked">미확인</span>
+        </div>
+
+        <div class="mini-gift">
+          <div class="mini-gift-thumb">👟</div>
+          <div class="mini-gift-info">
+            <p class="mini-gift-title">운동화</p>
+            <p class="mini-gift-price">89,000원</p>
+          </div>
+          <span class="mini-badge checked">확인함</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h3>공지사항</h3>
+          <span class="panel-more">더보기</span>
+        </div>
+
+        <div class="mini-notice">
+          <p class="mini-notice-title">위시리스트 사이트가 오픈했어요</p>
+          <p class="mini-notice-date">2026.08.24</p>
+        </div>
+
+        <div class="mini-notice">
+          <p class="mini-notice-title">선물 예약 기능이 곧 추가돼요</p>
+          <p class="mini-notice-date">2026.08.20</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
