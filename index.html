@@ -89,7 +89,7 @@
   /* 콘텐츠 영역 */
   main {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 0;
     padding: 32px 20px;
   }
   /* 히어로 영역 */
@@ -233,6 +233,119 @@
     color: #a89e93;
     margin: 0;
   }
+
+  /* 선물 목록 */
+  .gift-list-section {
+    max-width: 1100px;
+    margin: 0;
+    padding: 20px 20px 64px;
+  }
+  .gift-list-section h2 {
+    font-family: "Jalnan2", sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 24px;
+  }
+  .gift-list-frame {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    aspect-ratio: 3 / 2;
+    width: 600px;
+    max-width: 100%;
+    padding: 20px;
+  }
+  .gift-list-inner {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .gift-list-slot {
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 8fr 5fr 3fr;
+    padding: 8px;
+  }
+  .gift-list-cell {
+    border-right: 1px dashed var(--border);
+  }
+  .gift-list-cell:last-child {
+    border-right: none;
+  }
+  .no-divider .gift-list-cell {
+    border-right: 1px dashed var(--border);
+  }
+  .no-divider .gift-list-cell:last-child {
+    border-right: none;
+  }
+  .no-divider .gift-list-slot {
+    grid-template-columns: 1fr 7fr;
+  }
+  }
+
+  /* 친구들의 위시리스트 */
+  .friends-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+  }
+  .friends-section h3 {
+    font-family: "Jalnan2", sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin: 0 0 20px;
+  }
+  .friends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .friend-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .friend-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Jalnan2", sans-serif;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .friend-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .friend-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 3px;
+  }
+  .friend-count {
+    font-size: 14px;
+    color: #a89e93;
+    margin: 0;
+  }
+
+  /* 상단 좌우 배치 */
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
 </style>
 </head>
 <body>
@@ -250,55 +363,65 @@
   </nav>
 
   <main>
-    <div class="home-grid">
-      <section class="panel">
-        <div class="panel-header">
-          <h3>선물 목록</h3>
-          <span class="panel-more">더보기</span>
-        </div>
-
-        <div class="mini-gift">
-          <div class="mini-gift-thumb">🎧</div>
-          <div class="mini-gift-info">
-            <p class="mini-gift-title">무선 이어폰</p>
-            <p class="mini-gift-price">150,000원</p>
+    <div class="top-row">
+      <section class="gift-list-section">
+        <h2>선물 목록</h2>
+        <div class="gift-list-frame">
+          <div class="gift-list-inner">
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
           </div>
-          <span class="mini-badge checked">확인함</span>
-        </div>
-
-        <div class="mini-gift">
-          <div class="mini-gift-thumb">📚</div>
-          <div class="mini-gift-info">
-            <p class="mini-gift-title">책 - 코스모스</p>
-            <p class="mini-gift-price">18,000원</p>
-          </div>
-          <span class="mini-badge unchecked">미확인</span>
-        </div>
-
-        <div class="mini-gift">
-          <div class="mini-gift-thumb">👟</div>
-          <div class="mini-gift-info">
-            <p class="mini-gift-title">운동화</p>
-            <p class="mini-gift-price">89,000원</p>
-          </div>
-          <span class="mini-badge checked">확인함</span>
         </div>
       </section>
 
-      <section class="panel">
-        <div class="panel-header">
-          <h3>공지사항</h3>
-          <span class="panel-more">더보기</span>
-        </div>
-
-        <div class="mini-notice">
-          <p class="mini-notice-title">위시리스트 사이트가 오픈했어요</p>
-          <p class="mini-notice-date">2026.08.24</p>
-        </div>
-
-        <div class="mini-notice">
-          <p class="mini-notice-title">선물 예약 기능이 곧 추가돼요</p>
-          <p class="mini-notice-date">2026.08.20</p>
+      <section class="gift-list-section no-divider">
+        <h2>공지사항</h2>
+        <div class="gift-list-frame">
+          <div class="gift-list-inner">
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+            <div class="gift-list-slot">
+              <div class="gift-list-cell"></div>
+              <div class="gift-list-cell"></div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
