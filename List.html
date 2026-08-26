@@ -132,6 +132,11 @@
     font-size: 14px;
     color: #8a8078;
   }
+  .gift-row-date {
+    flex: 1;
+    font-size: 13px;
+    color: #b0a99c;
+  }
   .status-toggle {
     font-size: 12px;
     font-weight: 700;
@@ -216,6 +221,13 @@
         priceEl.className = "gift-row-price";
         priceEl.textContent = gift.price || "";
 
+        const dateEl = document.createElement("div");
+        dateEl.className = "gift-row-date";
+        if (gift.created_at) {
+          const d = new Date(gift.created_at);
+          dateEl.textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+        }
+
         const statusBtn = document.createElement("button");
         statusBtn.type = "button";
         statusBtn.className = "status-toggle " + (gift.checked ? "checked" : "unchecked");
@@ -224,6 +236,7 @@
 
         row.appendChild(titleEl);
         row.appendChild(priceEl);
+        row.appendChild(dateEl);
         row.appendChild(statusBtn);
         giftList.appendChild(row);
       });
