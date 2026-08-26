@@ -206,6 +206,10 @@
 
         <button type="submit" class="submit-btn">선물 목록에 추가</button>
         <p class="success-msg" id="successMsg">추가됐어요! 홈이나 선물 목록에서 확인해보세요.</p>
+        <div id="successLinks" style="display: none; gap: 10px; margin-top: 12px;">
+          <a href="index.html" style="flex: 1; text-align: center; font-family: 'Jalnan2', sans-serif; font-size: 13px; background: var(--accent); color: white; text-decoration: none; padding: 10px; border-radius: 8px;">홈으로</a>
+          <a href="list.html" style="flex: 1; text-align: center; font-family: 'Jalnan2', sans-serif; font-size: 13px; background: var(--accent-light); color: var(--accent); text-decoration: none; padding: 10px; border-radius: 8px;">전체 목록 보기</a>
+        </div>
       </form>
     </div>
   </main>
@@ -219,6 +223,7 @@
     const giftForm = document.getElementById("giftForm");
     const debugBanner = document.getElementById("debugBanner");
     const successMsg = document.getElementById("successMsg");
+    const successLinks = document.getElementById("successLinks");
 
     function showError(label, error) {
       debugBanner.style.display = "block";
@@ -241,6 +246,7 @@
       giftForm.reset();
       debugBanner.style.display = "none";
       successMsg.style.display = "block";
+      successLinks.style.display = "flex";
     });
   </script>
 
