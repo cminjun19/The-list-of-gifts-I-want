@@ -84,6 +84,11 @@
     font-weight: 400;
     color: var(--ink);
     cursor: default;
+    text-decoration: none;
+  }
+  .tab-btn.active {
+    text-decoration: underline;
+    text-underline-offset: 6px;
   }
 
   /* 콘텐츠 영역 */
@@ -378,73 +383,28 @@
   /* 선물 목록 실데이터 표시용 */
   .gift-list-slot .cell-title {
     padding: 0 10px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .gift-list-slot .cell-price {
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    color: #8a8078;
-  }
-  .gift-list-slot .cell-status {
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .status-toggle {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-  }
-  .status-toggle.checked {
-    background: var(--accent-light);
-    color: var(--accent);
-  }
-  .status-toggle.unchecked {
-    background: #f3ede3;
-    color: #a89e93;
-  }
-  .debug-banner {
-    background: #f8d7da;
-    color: #842029;
-    font-size: 13px;
-    padding: 10px 16px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    display: none;
-    white-space: pre-wrap;
-  }
-</style>
-</head>
+@@ -430,15 +405,15 @@
 <body>
 
   <header>
     <span class="logo">🎁</span>
+    <a class="logo" href="index.html" style="text-decoration: none;">🎁</a>
     <h1>내가 원하는 선물 목록</h1>
     <div class="auth-links">로그인 <span>|</span> 회원가입</div>
+    <div class="auth-links"><a href="login.html" style="color: inherit; text-decoration: none;">로그인</a> <span>|</span> <a href="login.html" style="color: inherit; text-decoration: none;">회원가입</a></div>
   </header>
 
   <nav>
     <span class="tab-btn">선물 목록 추가</span>
     <span class="tab-btn">선물 목록</span>
     <span class="tab-btn">공지사항</span>
+    <a class="tab-btn" href="add.html">선물 목록 추가</a>
+    <a class="tab-btn" href="list.html">선물 목록</a>
+    <a class="tab-btn active" href="index.html">홈</a>
   </nav>
 
   <main>
-    <div class="top-row">
-      <section class="gift-list-section">
-        <h2>선물 목록</h2>
+@@ -448,12 +423,6 @@
 
         <div class="debug-banner" id="debugBanner"></div>
 
@@ -455,72 +415,9 @@
         </form>
 
         <div class="gift-list-frame">
-          <div class="gift-list-inner">
           <div class="gift-list-inner" id="giftListInner">
             <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="gift-list-section no-divider">
-        <h2>공지사항</h2>
-        <div class="gift-list-frame">
-          <div class="gift-list-inner">
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-            <div class="gift-list-slot">
-              <div class="gift-list-cell"></div>
-              <div class="gift-list-cell"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- Supabase 연동 -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const SUPABASE_URL = "https://ucczbdnlsqsrbbbwecun.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_hEmL8pki9XjAN0nTb_Yp4w_aq42VcNa";
+@@ -523,7 +492,6 @@
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const giftListInner = document.getElementById("giftListInner");
@@ -528,78 +425,7 @@
     const debugBanner = document.getElementById("debugBanner");
 
     function showError(label, error) {
-      debugBanner.style.display = "block";
-      debugBanner.textContent = label + ": " + (error.message || JSON.stringify(error));
-    }
-
-    function renderGifts(gifts) {
-      giftListInner.innerHTML = "";
-
-      // 최대 5개까지만 화면에 보여줌 (틀이 5줄이라)
-      const rows = gifts.slice(0, 5);
-
-      rows.forEach((gift) => {
-        const slot = document.createElement("div");
-        slot.className = "gift-list-slot";
-
-        const titleCell = document.createElement("div");
-        titleCell.className = "cell-title";
-        titleCell.textContent = gift.title;
-
-        const priceCell = document.createElement("div");
-        priceCell.className = "cell-price";
-        priceCell.textContent = gift.price || "";
-
-        const statusCell = document.createElement("div");
-        statusCell.className = "cell-status";
-        const statusBtn = document.createElement("button");
-        statusBtn.type = "button";
-        statusBtn.className = "status-toggle " + (gift.checked ? "checked" : "unchecked");
-        statusBtn.textContent = gift.checked ? "확인함" : "미확인";
-        statusBtn.addEventListener("click", () => toggleChecked(gift));
-        statusCell.appendChild(statusBtn);
-
-        slot.appendChild(titleCell);
-        slot.appendChild(priceCell);
-        slot.appendChild(statusCell);
-        giftListInner.appendChild(slot);
-      });
-
-      // 남는 줄은 빈 틀로 채움
-      for (let i = rows.length; i < 5; i++) {
-        const emptySlot = document.createElement("div");
-        emptySlot.className = "gift-list-slot";
-        emptySlot.innerHTML =
-          '<div class="gift-list-cell"></div><div class="gift-list-cell"></div><div class="gift-list-cell"></div>';
-        giftListInner.appendChild(emptySlot);
-      }
-    }
-
-    async function loadGifts() {
-      const { data, error } = await sb
-        .from("gifts")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        console.error("불러오기 실패:", error.message, error.details, error.hint, error.code);
-        showError("불러오기 실패", error);
-        return;
-      }
-      renderGifts(data);
-    }
-
-    async function toggleChecked(gift) {
-      const { error } = await sb
-        .from("gifts")
-        .update({ checked: !gift.checked })
-        .eq("id", gift.id);
-
-      if (error) {
-        console.error("상태 변경 실패:", error.message, error.details, error.hint, error.code);
-        showError("상태 변경 실패", error);
-        return;
-      }
+@@ -602,29 +570,8 @@
       loadGifts();
     }
 
